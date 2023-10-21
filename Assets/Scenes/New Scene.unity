@@ -10236,6 +10236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd197135616f10e489ae0be43fd2f866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWeaponLoading: 0
   shotgunFeedback: {fileID: 393519847}
   rifleFeedback: {fileID: 746121374}
   weaponPointShotgun: {fileID: 144593925}
@@ -11519,7 +11520,7 @@ MonoBehaviour:
         RemapRangeFalloff: {x: 0, y: 1}
         Owner: {fileID: 393519847}
         DebugActive: 0
-        Sfx: {fileID: 8300000, guid: bdad2c92cbd89a54ea61af212e738d6f, type: 3}
+        Sfx: {fileID: 8300000, guid: 8091fd76ee33e554d9e2033262b045b7, type: 3}
         RandomSfx: []
         SequentialOrder: 0
         SequentialOrderHoldLast: 0
@@ -18919,6 +18920,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &803110293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338444816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781881c852ae2994984dfe26acac0874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fpsController: {fileID: 360487520}
 --- !u!1 &815899678
 GameObject:
   m_ObjectHideFlags: 0

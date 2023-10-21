@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
     {
         Vector2 movementInput = playerInput.actions["MoveCamera"].ReadValue<Vector2>();
 
-        print(movementInput);
+       
 
         pitch += speed * -movementInput.y;
         yaw += speed * movementInput.x;

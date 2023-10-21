@@ -2,17 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MoreMountains.Tools;
+using MoreMountains.Feedbacks;
+
+
+public class Weapon 
+{
+    
+    public int bullets;
+    public bool needsReload;
+    public MMFeedbacks weaponFeedback;
+    public GameObject weaponPoint;
+    public Animator anim;
+    public Weapon(int _bullets, MMFeedbacks _weaponFeedback, GameObject _weaponPoint)
+    {
+        bullets = _bullets;
+        needsReload = false;
+        weaponFeedback = _weaponFeedback;
+        weaponPoint = _weaponPoint;
+        anim = weaponPoint.transform.parent.transform.GetComponent<Animator>();
+    }
+
+}
 
 public class FPSController : MonoBehaviour
 {
-    private bool isWeaponLoading = false;
+    private int weaponIndex = 0;
+    public bool isWeaponLoading = false;
+    private Weapon shotgun;
+    private Weapon rifle;
+    private Weapon selectedWeapon;
 
-    public GameObject weaponPoint;
+
+    public MMFeedbacks shotgunFeedback;
+    public MMFeedbacks rifleFeedback;
+
+
+
+    public GameObject weaponPointShotgun;
+    public GameObject weaponPointRifle;
     public PlayerInput playerInput;
-    public Animator anim;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        shotgun = new Weapon(4, shotgunFeedback,weaponPointShotgun);
+        rifle = new Weapon(6, rifleFeedback,weaponPointRifle);
+        selectedWeapon = rifle;
+        shotgun.anim.SetTrigger("Down");
         playerInput = GetComponent<PlayerInput>();
     }
 
@@ -23,8 +61,12 @@ public class FPSController : MonoBehaviour
         {
             Shoot();
         }
+        if (playerInput.actions["ChangeWeapon"].WasPressedThisFrame() && !isWeaponLoading)
+        {
+            ChangeWeapon();
+        }
 
-        Vector3 forward = transform.TransformDirection(weaponPoint.transform.forward) * 10;
+        Vector3 forward = transform.TransformDirection(selectedWeapon.weaponPoint.transform.forward) * 10;
         Debug.DrawRay(transform.position, forward, Color.green);
 
     }
@@ -33,13 +75,35 @@ public class FPSController : MonoBehaviour
     {
         isWeaponLoading = true;
         //anim.SetTrigger("Shoot");
+        selectedWeapon.weaponFeedback.PlayFeedbacks();
         print("shoot");
         RaycastHit hit;
-        if (Physics.Raycast(weaponPoint.transform.position, weaponPoint.transform.forward, out hit))
+        if (Physics.Raycast(selectedWeapon.weaponPoint.transform.position, selectedWeapon.weaponPoint.transform.forward, out hit))
         {
             print(hit.transform);
         }
     }
+    void ChangeWeapon()
+    {
+        selectedWeapon.anim.SetTrigger("Down");
+        if (weaponIndex == 0)
+        {
+            selectedWeapon = shotgun;
+            weaponIndex = 1;
+        }
+        else
+        {
+            selectedWeapon = rifle;
+            weaponIndex = 0;
+        }
+        Invoke("UpWeapon", 0.2f);
+    }
+
+    void UpWeapon()
+    {
+        selectedWeapon.anim.SetTrigger("Up");
+    }
+
 
     public void FinishLoadWeapon()
     {

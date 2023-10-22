@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -17,7 +18,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private Slider sensitivitySlider;
     [SerializeField]
-    private Text sliderNumber;
+    private Slider musicSlider;
+    [SerializeField]
+    private Slider sfxSlider;
+    [SerializeField]
+    private AudioMixer audioMixer;
 
     [Header("Post-Processing")]
     [SerializeField]
@@ -35,6 +40,8 @@ public class GameManager : Singleton<GameManager>
     {
         globalVolume.profile.TryGet(out depthOfField);
         sensitivitySlider.onValueChanged.AddListener(OnSensitivityValueChange);
+        musicSlider.onValueChanged.AddListener(OnMusicValueChange);
+        sfxSlider.onValueChanged.AddListener(OnSFXValueChange);
     }
 
     public void OnPlayButtonClicked()
@@ -62,6 +69,15 @@ public class GameManager : Singleton<GameManager>
     public void OnSensitivityValueChange(float value)
     {
         mouseSensitivity = (int) value;
-        sliderNumber.text = ((int) value).ToString();
+    }
+
+    public void OnMusicValueChange(float value)
+    {
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20);
+    }
+
+    public void OnSFXValueChange(float value)
+    {
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20);
     }
 }

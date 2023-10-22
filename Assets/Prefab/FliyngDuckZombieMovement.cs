@@ -28,10 +28,21 @@ public class FliyngDuckZombieMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isOnGround = true;
+            GetComponent<EnemyHealth>().duckType = 0;
+            GetComponent<Animator>().SetBool("IsFlying", false);
+            transform.LookAt(player);
+            Invoke("AwakeDuck",2f);
+            GetComponent<Animator>().SetTrigger("Death");
 
         }
     }
+
+    private void AwakeDuck()
+    {
+        isOnGround = true;
+    }
+
+
 
     private void Update()
     {
@@ -58,7 +69,7 @@ public class FliyngDuckZombieMovement : MonoBehaviour
             speed = moveSpeed;
         }
 
-        transform.Translate(transform.forward * flyingSpeed * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
 
 
         elapsedTime += Time.deltaTime;
@@ -66,11 +77,13 @@ public class FliyngDuckZombieMovement : MonoBehaviour
 
     public void Fall()
     {
+        
         GetComponent<Animator>().SetTrigger("Fall");
-        transform.rotation = Quaternion.Euler(90, 0, 0);
+        
+        //transform.rotation = Quaternion.Euler(90, 0, 0);
         diving = true;
-        GetComponent<Animator>().SetTrigger("Picada");
-        speed = 30;
+        speed = 0;
+        GetComponent<Rigidbody>().useGravity = true;
     }
 
     /*public void ()

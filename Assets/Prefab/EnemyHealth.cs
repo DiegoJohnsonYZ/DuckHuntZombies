@@ -20,16 +20,22 @@ public class EnemyHealth : MonoBehaviour
         if(duckType == 1)
         {
             FliyngDuckZombieMovement fDuck = GetComponent<FliyngDuckZombieMovement>();
+            
             fDuck.Fall();
         }
         
         print("DIRECCION" + dir);
-        //GetComponent<Rigidbody>().AddForce(dir*15,ForceMode.Impulse);
+        if (duckType == 0)
+        {
+            GetComponent<Rigidbody>().AddForce(dir * 15, ForceMode.Impulse);
+            GetComponent<Animator>().SetTrigger("Hurt");
+        }
+            
         currentHealth -= damage;
 
         if (currentHealth <= 0)
         {
-            //Die();
+            Die();
         }
 
         print("hit");

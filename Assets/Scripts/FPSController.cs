@@ -150,8 +150,8 @@ public class FPSController : MonoBehaviour
         }
     void ChangeWeapon()
     {
-        health -= 20;
-        TargetProgressBar.UpdateBar(health,0,100);
+        //health -= 20;
+        //TargetProgressBar.UpdateBar(health,0,100);
         selectedWeapon.anim.SetTrigger("Down");
         if (weaponIndex == 0)
         {

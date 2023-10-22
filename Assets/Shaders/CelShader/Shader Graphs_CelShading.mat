@@ -60,7 +60,7 @@ Material:
     - _QueueOffset: 0
     - _Smoothness: 1000
     m_Colors:
-    - _Diffuse_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Diffuse_Color: {r: 0.41509432, g: 0.218284, b: 0.08027767, a: 1}
     - _Fresnel_Color: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     - _Specular_Color: {r: 0.8117647, g: 0.8117647, b: 0.8117647, a: 1}
   m_BuildTextureStacks: []

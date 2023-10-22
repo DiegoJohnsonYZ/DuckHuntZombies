@@ -73,7 +73,7 @@ public class FPSController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
-        shotgun = new Weapon(4,4,1f, shotgunFeedback,weaponPointShotgun,reloadShotgun);
+        shotgun = new Weapon(4,4,1.3f, shotgunFeedback,weaponPointShotgun,reloadShotgun);
         rifle = new Weapon(6,6,1.3f, rifleFeedback,weaponPointRifle,reloadRifle);
         selectedWeapon = rifle;
         shotgun.anim.SetTrigger("Down");

@@ -8,7 +8,8 @@ public class DuckZombieMovement : MonoBehaviour
     public float moveSpeed = 3.0f;
     private bool isOnGround = false;
     private bool isChasingPlayer = false;
-
+    public int hitsToKill = 2; // Cambia esto según tus necesidades (2 para dos hits)
+    private int currentHits = 0;
     private void Start()
     {
         // Busca el objeto con la etiqueta "Player" y asigna su transform al jugador.
@@ -44,4 +45,15 @@ public class DuckZombieMovement : MonoBehaviour
             }
         }
     }
+    
+    /*public void ()
+    {
+        currentHits++;
+        if (currentHits >= hitsToKill)
+        {
+            Die(); // Llama a una función que maneje la muerte del pato.
+        }
+    }*/
+
+  
 }

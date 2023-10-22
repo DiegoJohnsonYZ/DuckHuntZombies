@@ -269,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duckZombiePrefabs:
   - {fileID: 4010594150877525218, guid: 43874c5c8ca81554a98299b9ac5506b4, type: 3}
-  player: {fileID: 1282948277185346936, guid: 9f807201b916fa44a91b1203c1e5804c, type: 3}
+  player: {fileID: 1310414786}
   spawnInterval: 15
   spawnRadius: 10
   spawnAltitude: 10
@@ -874,6 +874,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d179142fddfe1584aafcddc8af47a33f, type: 3}
+--- !u!4 &1310414786 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1282948277185346936, guid: 9f807201b916fa44a91b1203c1e5804c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1282948277400528667}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1598901013
 GameObject:
   m_ObjectHideFlags: 0

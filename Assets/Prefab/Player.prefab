@@ -13384,6 +13384,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWeaponLoading: 0
+  isWeaponReloading: 0
+  isWeaponChanging: 0
+  TargetProgressBar: {fileID: 0}
+  reloadRifle: {fileID: 0}
+  reloadShotgun: {fileID: 0}
   shotgunFeedback: {fileID: 1282948277152302588}
   rifleFeedback: {fileID: 1282948277067616133}
   weaponPointShotgun: {fileID: 1282948277527261982}
@@ -13391,6 +13396,7 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   muertePato: {fileID: 0}
   enemyHealth: {fileID: 0}
+  weaponPointer: {fileID: 0}
 --- !u!65 &4943405273236273438
 BoxCollider:
   m_ObjectHideFlags: 0

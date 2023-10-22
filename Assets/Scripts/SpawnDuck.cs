@@ -13,9 +13,12 @@ public class SpawnDuck : MonoBehaviour
      //  public float spawnForce = 10f; // Fuerza de impulso
        public float minSpawnForce = 5f; // Fuerza de impulso mínima
        public float maxSpawnForce = 15f; // Fuerza de impulso máxima
-      
+       private int ducksKilled = 0; // Para llevar un registro de patos muertos
+       private float currentSpawnInterval; // Para llevar un registro del intervalo actual
        private void Start()
        {
+           currentSpawnInterval = spawnInterval; // Establece el valor inicial del intervalo
+
            // Inicia la generación de patos zombies en intervalos regulares
            StartCoroutine(SpawnDuckZombies());
        }
@@ -47,8 +50,22 @@ public class SpawnDuck : MonoBehaviour
               Vector3 duckPosition = duckZombie.transform.position;
               duckPosition.y += randomAltitude;
               duckZombie.transform.position = duckPosition;
+              
+              ducksKilled++;
 
-             
+              if (ducksKilled >= 4)
+              {
+                  currentSpawnInterval -= 0.5f;
+                  ducksKilled = 0;
+              }
+
+              if (currentSpawnInterval < 1.0f)
+              {
+                  currentSpawnInterval = 1.0f;
+              }
+
+              // Imprime el valor actual de currentSpawnInterval en la consola
+              Debug.Log("Current Spawn Interval: " + currentSpawnInterval);
               // Calcula la dirección hacia el jugador
               Vector3 lookDirection = (player.position - duckZombie.transform.position).normalized;
               //  duckZombie.transform.rotation = Quaternion.LookRotation(lookDirection);

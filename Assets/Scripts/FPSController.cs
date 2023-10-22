@@ -82,7 +82,8 @@ public class FPSController : MonoBehaviour
             selectedWeapon.bullets--;
             if (selectedWeapon.bullets >= 0)
             {
-                Shoot();
+                if(selectedWeapon ==rifle)Shoot();
+                if(selectedWeapon ==shotgun)ShootEnemies();
             }else
             {
                 print("no anmmo PONER CODIGO DE FEEDBACK");
@@ -127,24 +128,11 @@ public class FPSController : MonoBehaviour
                 // Verifica si el objeto impactado tiene la etiqueta "enemy"
                 if (hit.transform.CompareTag("Enemy"))
                 {
-                    // Dependiendo del arma seleccionada, determina el número de disparos necesarios
-                    if (selectedWeapon == rifle)
+                    // Si el rifle está seleccionado, un solo disparo elimina al enemigo
+                    EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+                    if (enemyHealth != null)
                     {
-                        // Si el rifle está seleccionado, un solo disparo elimina al enemigo
-                        EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
-                        if (enemyHealth != null)
-                        {
-                            enemyHealth.TakeDamage(2); // Reduce la salud del enemigo en 1
-                        }
-                    }
-                    else
-                    {
-                        // Si otro arma está seleccionada, necesitas dos disparos para eliminar al enemigo
-                        EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
-                        if (enemyHealth != null)
-                        {
-                            enemyHealth.TakeDamage(1); // Reduce la salud del enemigo en 1
-                        }
+                        enemyHealth.TakeDamage(2); // Reduce la salud del enemigo en 1
                     }
                 }
             }
@@ -194,6 +182,32 @@ public class FPSController : MonoBehaviour
     {
         isWeaponLoading = false;
     }
-    
-   
+
+
+    public void ShootEnemies()
+    {
+        isWeaponLoading = true;
+        //anim.SetTrigger("Shoot");
+        selectedWeapon.weaponFeedback.PlayFeedbacks();
+
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Enemy");
+        float distance = 50;
+        Vector3 position = selectedWeapon.weaponPoint.transform.position;
+        foreach (GameObject go in gos)
+        {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            print(curDistance);
+            if (curDistance < distance)
+            {
+                EnemyHealth enemyHealth = go.transform.GetComponent<EnemyHealth>();
+                if(curDistance<distance/2) enemyHealth.TakeDamage(2);
+                if(curDistance<distance/2) enemyHealth.TakeDamage(1);
+
+
+            }
+        }
+    }
+
 }

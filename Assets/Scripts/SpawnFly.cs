@@ -26,6 +26,7 @@ public class SpawnFly : MonoBehaviour
             Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
             Vector3 spawnPosition = new Vector3(player.position.x + randomCircle.x, player.position.y + spawnAltitude, player.position.z + randomCircle.y);
             GameObject flyingDuckZombie = Instantiate(duckZombiePrefab, spawnPosition, Quaternion.identity);
+            
             StartCoroutine(MoveTowardsPlayer(flyingDuckZombie));
             yield return new WaitForSeconds(spawnInterval);
         }
@@ -35,27 +36,28 @@ public class SpawnFly : MonoBehaviour
     {
         float elapsedTime = 0f;
         bool diving = false;
-
-        while (elapsedTime < 6f) // El pato volará durante 6 segundos
+        float speed = flyingSpeed;
+        
+        while (true) // El pato volará durante 6 segundos
         {
+            
             if (duck == null)
             {
                 yield break; // Salir de la rutina si el pato ha sido destruido
             }
-            Vector3 directionToPlayer = (player.position - duck.transform.position).normalized;
-            duck.transform.Translate(directionToPlayer * flyingSpeed * Time.deltaTime);
-
+            
             // Check if it's time to initiate a dive attack
             if (!diving && elapsedTime >= 6f)
             {
+                duck.transform.LookAt(player);
                 diving = true;
+                print("picada");
+                duck.GetComponent<Animator>().SetTrigger("Picada");
+                speed = diveSpeed;
             }
 
-            if (diving)
-            {
-                // Change the movement for a dive attack
-                duck.transform.Translate(directionToPlayer * diveSpeed * Time.deltaTime);
-            }
+            duck.transform.Translate(duck.transform.forward * flyingSpeed * Time.deltaTime, Space.World);
+
 
             elapsedTime += Time.deltaTime;
             yield return null;

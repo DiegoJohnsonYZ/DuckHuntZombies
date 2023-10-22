@@ -7,13 +7,14 @@ public class DuckZombieMovement : MonoBehaviour
     public Transform player;
     public float moveSpeed = 3.0f;
     private bool isOnGround = false;
-    private bool isChasingPlayer = false;
+    [SerializeField]private bool isChasingPlayer = false;
     public int hitsToKill = 2; // Cambia esto según tus necesidades (2 para dos hits)
     private int currentHits = 0;
     private void Start()
     {
         // Busca el objeto con la etiqueta "Player" y asigna su transform al jugador.
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        transform.LookAt(player);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -21,6 +22,7 @@ public class DuckZombieMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+
         }
     }
 
@@ -29,6 +31,8 @@ public class DuckZombieMovement : MonoBehaviour
         // Verifica si el jugador existe.
         if (player != null)
         {
+            Vector3 moveDirection = Vector3.zero;
+
             if (isOnGround && !isChasingPlayer)
             {
                 // Comienza a perseguir al jugador cuando está en el suelo.
@@ -37,11 +41,10 @@ public class DuckZombieMovement : MonoBehaviour
 
             if (isChasingPlayer)
             {
-                // Calcula la dirección hacia el jugador.
-                Vector3 moveDirection = (player.position - transform.position).normalized;
+                
 
                 // Mueve al pato zombie en la dirección del jugador a la velocidad especificada.
-                transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+                transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
             }
         }
     }

@@ -21,31 +21,32 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 movementInput = playerInput.actions["MoveCamera"].ReadValue<Vector2>();
-
-       
-
-        pitch += speed * -movementInput.y;
-        yaw += speed * movementInput.x;
-
-        // Clamp pitch:
-        pitch = Mathf.Clamp(pitch, -45f, 45f);
-
-        // Wrap yaw:
-        while (yaw < 0f)
+        if (GameManager.Instance.GamePaused == false)
         {
-            yaw += 360f;
+
+            Vector2 movementInput = playerInput.actions["MoveCamera"].ReadValue<Vector2>();
+
+            print((GameManager.Instance.MouseSensitivity / 5f) * speed);
+
+            float trueSpeed = (GameManager.Instance.MouseSensitivity / 5f) * speed;
+            pitch += trueSpeed * -movementInput.y;
+            yaw += trueSpeed * movementInput.x;
+
+            // Clamp pitch:
+            pitch = Mathf.Clamp(pitch, -45f, 45f);
+
+            // Wrap yaw:
+            while (yaw < 0f)
+            {
+                yaw += 360f;
+            }
+            while (yaw >= 360f)
+            {
+                yaw -= 360f;
+            }
+
+            // Set orientation:
+            transform.eulerAngles = new Vector3(pitch, yaw, 0f);
         }
-        while (yaw >= 360f)
-        {
-            yaw -= 360f;
-        }
-
-        // Set orientation:
-        transform.eulerAngles = new Vector3(pitch, yaw, 0f);
-
-
-        
-
     }
 }

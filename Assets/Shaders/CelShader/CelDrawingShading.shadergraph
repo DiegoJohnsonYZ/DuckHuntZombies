@@ -47,9 +47,6 @@
         },
         {
             "m_Id": "b772e9085622428f830f134f90cf5c75"
-        },
-        {
-            "m_Id": "6fa0fdfa76a045ea94d9b476a763aee8"
         }
     ],
     "m_Keywords": [],
@@ -278,9 +275,6 @@
         },
         {
             "m_Id": "df26a61cc93545269b7b587dd3e0c909"
-        },
-        {
-            "m_Id": "c4a9eec3710e4582bdaecdad21770e08"
         },
         {
             "m_Id": "62d3d0aedac04ab8b82d65e282e24f70"
@@ -1453,8 +1447,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 68.99996948242188,
-            "y": -655.0
+            "x": 125.0000228881836,
+            "y": -660.0000610351563
         },
         "m_Blocks": [
             {
@@ -1470,8 +1464,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 68.99996948242188,
-            "y": -454.9999694824219
+            "x": 125.0000228881836,
+            "y": -460.0000305175781
         },
         "m_Blocks": [
             {
@@ -2231,8 +2225,8 @@
     "m_ObjectId": "1944d31e9ec8496690c783c99dd8b90b",
     "m_Title": "Draw Effect",
     "m_Position": {
-        "x": -2472.04052734375,
-        "y": -1663.725830078125
+        "x": -2472.0,
+        "y": -1692.0
     }
 }
 
@@ -3329,9 +3323,6 @@
         },
         {
             "m_Id": "b772e9085622428f830f134f90cf5c75"
-        },
-        {
-            "m_Id": "6fa0fdfa76a045ea94d9b476a763aee8"
         }
     ]
 }
@@ -4890,35 +4881,6 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
-    "m_ObjectId": "6fa0fdfa76a045ea94d9b476a763aee8",
-    "m_Guid": {
-        "m_GuidSerialized": "4f8346a8-9907-4253-a2a8-6f577ecf0aac"
-    },
-    "m_Name": "MainTex",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "MainTex",
-    "m_DefaultReferenceName": "_MainTex",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
-        "m_Guid": ""
-    },
-    "isMainTexture": false,
-    "useTilingAndOffset": false,
-    "m_Modifiable": true,
-    "m_DefaultType": 0
 }
 
 {
@@ -6576,19 +6538,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
-    "m_ObjectId": "9a1fb544cf81498cb35354f8678eb908",
-    "m_Id": 0,
-    "m_DisplayName": "MainTex",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_BareResource": false
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "9b3847fd20954de8bb41af107405485d",
     "m_Id": 0,
@@ -7690,41 +7639,6 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
-    }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
-    "m_ObjectId": "c4a9eec3710e4582bdaecdad21770e08",
-    "m_Group": {
-        "m_Id": "1944d31e9ec8496690c783c99dd8b90b"
-    },
-    "m_Name": "Property",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -1404.0001220703125,
-            "y": -1591.0001220703125,
-            "width": 129.0001220703125,
-            "height": 34.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "9a1fb544cf81498cb35354f8678eb908"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_Property": {
-        "m_Id": "6fa0fdfa76a045ea94d9b476a763aee8"
     }
 }
 

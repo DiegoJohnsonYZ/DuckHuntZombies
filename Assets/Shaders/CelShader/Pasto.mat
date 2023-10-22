@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Pasto
-  m_Shader: {fileID: -6465566751694194690, guid: bc6a282226a8cc04eb9847f9e24bacd4,
+  m_Shader: {fileID: -6465566751694194690, guid: 6e49ddffc6e9db44288e2c4c493eb905,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -21,8 +21,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Diffuse_Texture:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HatchingTexture:
+        m_Texture: {fileID: 2800000, guid: e58cddc0d44c4ed41b2fe46f0b2ac258, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LineTexture:
@@ -30,6 +38,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -47,19 +59,32 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 0
     - _Ambient_Strength: 0.25
-    - _DrawingStrenght: 0.35
-    - _Falloff_Amount: 0.01
+    - _Blend: 0
+    - _BlendOp: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DrawingStrenght: 0.1
+    - _DstBlend: 0
+    - _Falloff_Amount: 0.5
     - _Fresnel_Size: 0.05
     - _Lighting_Cutoff: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SampleGI: 0
     - _Smoothness: 1000
     - _SmudgeStrength: 0.003
     - _Speed: 2.5
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _ZWrite: 1
     m_Colors:
+    - _BaseColor: {r: 0.15895337, g: 0.7169812, b: 0.19401264, a: 1}
+    - _Color: {r: 0.15895334, g: 0.7169812, b: 0.19401261, a: 1}
     - _Diffuse_Color: {r: 0.3275187, g: 0.6037736, b: 0.41056708, a: 1}
     - _Fresnel_Color: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
+    - _MainColor: {r: 0.0768957, g: 0.6037736, b: 0.14730793, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _Specular_Color: {r: 0.8117647, g: 0.8117647, b: 0.8117647, a: 1}
     - _Tiling: {r: 10, g: 10, b: 0, a: 0}

@@ -92,8 +92,7 @@ public class FPSController : MonoBehaviour
             isWeaponReloading = true;
             ReloadWeapon();
         }
-        Vector3 forward = transform.TransformDirection(selectedWeapon.weaponPoint.transform.forward) * 10;
-        Debug.DrawRay(transform.position, forward, Color.green);
+        Debug.DrawRay(selectedWeapon.weaponPoint.transform.position, selectedWeapon.weaponPoint.transform.forward, Color.blue, 6000f);
 
     }
 

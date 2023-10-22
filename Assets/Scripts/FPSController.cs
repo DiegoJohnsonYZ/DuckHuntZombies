@@ -65,6 +65,8 @@ public class FPSController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
         shotgun = new Weapon(4,4,2f, shotgunFeedback,weaponPointShotgun,reloadShotgun);
         rifle = new Weapon(6,6,3f, rifleFeedback,weaponPointRifle,reloadRifle);
         selectedWeapon = rifle;
@@ -179,6 +181,12 @@ public class FPSController : MonoBehaviour
         selectedWeapon.anim.SetTrigger("Down");
         MMSoundManagerSoundPlayEvent.Trigger(selectedWeapon.reloadSound,MMSoundManager.MMSoundManagerTracks.Sfx,this.transform.position);
         Invoke("UpWeapon", selectedWeapon.reloadTime);
+    }
+
+    public void HitPlayer()
+    {
+        health -= 20;
+        TargetProgressBar.UpdateBar(health,0,100);
     }
 
 

@@ -8,6 +8,7 @@ public class MuertePato : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            other.GetComponent<FPSController>().HitPlayer();
             // Verifica si el pato zombie ha colisionado con el jugador
             Destroy(gameObject); // Destruye el pato zombie
         }

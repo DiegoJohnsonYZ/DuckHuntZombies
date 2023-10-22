@@ -10237,6 +10237,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWeaponLoading: 0
+  isWeaponReloading: 0
+  isWeaponChanging: 0
+  reloadRifle: {fileID: 8300000, guid: eb197c3b192dcde40b2a3ec6c76b47e7, type: 3}
+  reloadShotgun: {fileID: 8300000, guid: 28dd96b352de67540990a85ed87acbfd, type: 3}
   shotgunFeedback: {fileID: 393519847}
   rifleFeedback: {fileID: 746121374}
   weaponPointShotgun: {fileID: 144593925}
@@ -10433,8 +10437,8 @@ MonoBehaviour:
   - rid: 6574157537421819908
   - rid: 6574157537421819909
   - rid: 6574157537421819910
-  - rid: 6574157537421819912
   - rid: 6574157538486910976
+  - rid: 6574157537421819912
   - rid: 6574157538486910977
   KeepPlayModeChanges: 0
   PerformanceMode: 0
@@ -11868,7 +11872,7 @@ MonoBehaviour:
         RemapRangeFalloff: {x: 0, y: 1}
         Owner: {fileID: 393519847}
         DebugActive: 0
-        Sfx: {fileID: 8300000, guid: 9492db2c6c84e804ba6c35c72686d45e, type: 3}
+        Sfx: {fileID: 8300000, guid: 4ad719ec50e11c14fb5b19a0604c3e52, type: 3}
         RandomSfx: []
         SequentialOrder: 0
         SequentialOrderHoldLast: 0

@@ -19,18 +19,21 @@ public class WeaponSwayController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 movementInput = playerInput.actions["MoveCamera"].ReadValue<Vector2>();
+        if (GameManager.Instance.GamePaused == false)
+        {
+            Vector2 movementInput = playerInput.actions["MoveCamera"].ReadValue<Vector2>();
 
-        float mouseX = movementInput.x*swayMultiplier;
-        float mouseY = movementInput.y*swayMultiplier;
+            float mouseX = movementInput.x * swayMultiplier;
+            float mouseY = movementInput.y * swayMultiplier;
 
 
-        Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
-        Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
+            Quaternion rotationX = Quaternion.AngleAxis(-mouseY, Vector3.right);
+            Quaternion rotationY = Quaternion.AngleAxis(mouseX, Vector3.up);
 
-        Quaternion targetRotation = rotationX * rotationY;
+            Quaternion targetRotation = rotationX * rotationY;
 
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smooth * Time.deltaTime);
-
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, smooth * Time.deltaTime);
+        
+        }
     }
 }

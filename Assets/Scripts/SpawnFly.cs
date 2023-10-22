@@ -22,12 +22,16 @@ public class SpawnFly : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitUntil(() => GameManager.Instance.GamePaused == false);
+
             GameObject duckZombiePrefab = duckZombiePrefabs[Random.Range(0, duckZombiePrefabs.Count)];
             Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
             Vector3 spawnPosition = new Vector3(player.position.x + randomCircle.x, player.position.y + spawnAltitude, player.position.z + randomCircle.y);
             GameObject flyingDuckZombie = Instantiate(duckZombiePrefab, spawnPosition, Quaternion.identity);
             
             StartCoroutine(MoveTowardsPlayer(flyingDuckZombie));
+
+            yield return new WaitUntil(() => GameManager.Instance.GamePaused == false);
             yield return new WaitForSeconds(spawnInterval);
         }
     }
@@ -37,10 +41,12 @@ public class SpawnFly : MonoBehaviour
         float elapsedTime = 0f;
         bool diving = false;
         float speed = flyingSpeed;
-        
+
+
         while (true) // El pato volará durante 6 segundos
         {
-            
+            yield return new WaitUntil(() => GameManager.Instance.GamePaused == false);
+
             if (duck == null)
             {
                 yield break; // Salir de la rutina si el pato ha sido destruido
@@ -58,11 +64,10 @@ public class SpawnFly : MonoBehaviour
 
             duck.transform.Translate(duck.transform.forward * flyingSpeed * Time.deltaTime, Space.World);
 
-
             elapsedTime += Time.deltaTime;
             yield return null;
+        }
     }
-}
     
     void DestroyDuck(GameObject duck)
     {

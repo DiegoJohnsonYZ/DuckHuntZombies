@@ -61,11 +61,9 @@ public class FPSController : MonoBehaviour
     public EnemyHealth enemyHealth;
     public GameObject weaponPointer;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
         shotgun = new Weapon(4,4,2f, shotgunFeedback,weaponPointShotgun,reloadShotgun);
         rifle = new Weapon(6,6,3f, rifleFeedback,weaponPointRifle,reloadRifle);
@@ -77,67 +75,78 @@ public class FPSController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerInput.actions["Shoot"].WasPressedThisFrame() && !isWeaponLoading && !isWeaponReloading && !isWeaponChanging)
+        Cursor.visible = GameManager.Instance.GamePaused;
+
+        if (playerInput.actions["Pause"].WasPressedThisFrame())
         {
-            selectedWeapon.bullets--;
-            if (selectedWeapon.bullets >= 0)
+            GameManager.Instance.GamePaused = !GameManager.Instance.GamePaused;
+            GameManager.Instance.OnSettingsButtonPressed();
+        }
+        else if (GameManager.Instance.GamePaused == false)
+        {
+            if (playerInput.actions["Shoot"].WasPressedThisFrame() && !isWeaponLoading && !isWeaponReloading && !isWeaponChanging)
             {
-                if(selectedWeapon ==rifle)Shoot();
-                if(selectedWeapon ==shotgun)ShootEnemies();
-            }else
-            {
-                print("no anmmo PONER CODIGO DE FEEDBACK");
+                selectedWeapon.bullets--;
+                if (selectedWeapon.bullets >= 0)
+                {
+                    if (selectedWeapon == rifle) Shoot();
+                    if (selectedWeapon == shotgun) ShootEnemies();
+                }
+                else
+                {
+                    print("no anmmo PONER CODIGO DE FEEDBACK");
+                }
+
             }
-            
-        }
-        if (playerInput.actions["ChangeWeapon"].WasPressedThisFrame() && !isWeaponLoading && !isWeaponReloading && !isWeaponChanging)
-        {
-            isWeaponChanging = true;
-            ChangeWeapon();
-        }
-        if (playerInput.actions["Reload"].WasPressedThisFrame() && !isWeaponLoading && !isWeaponReloading && !isWeaponChanging)
-        {
-            isWeaponReloading = true;
-            ReloadWeapon();
-        }
-        Vector3 forward = transform.TransformDirection(selectedWeapon.weaponPoint.transform.forward) * 10;
-        Debug.DrawRay(transform.position, forward, Color.green);
-        
-        // Obtén la dirección hacia donde apunta el arma seleccionada
-        Vector3 weaponDirection = selectedWeapon.weaponPoint.transform.forward;
+            if (playerInput.actions["ChangeWeapon"].WasPressedThisFrame() && !isWeaponLoading && !isWeaponReloading && !isWeaponChanging)
+            {
+                isWeaponChanging = true;
+                ChangeWeapon();
+            }
+            if (playerInput.actions["Reload"].WasPressedThisFrame() && !isWeaponLoading && !isWeaponReloading && !isWeaponChanging)
+            {
+                isWeaponReloading = true;
+                ReloadWeapon();
+            }
 
-        // Calcula la posición en la pantalla donde debe estar el puntero
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(selectedWeapon.weaponPoint.transform.position + weaponDirection * 10f);
+            Vector3 forward = transform.TransformDirection(selectedWeapon.weaponPoint.transform.forward) * 10;
+            Debug.DrawRay(transform.position, forward, Color.green);
 
-        // Actualiza la posición del puntero en el Canvas
-        weaponPointer.transform.position = screenPosition;
+            // Obtén la dirección hacia donde apunta el arma seleccionada
+            Vector3 weaponDirection = selectedWeapon.weaponPoint.transform.forward;
 
+            // Calcula la posición en la pantalla donde debe estar el puntero
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(selectedWeapon.weaponPoint.transform.position + weaponDirection * 10f);
+
+            // Actualiza la posición del puntero en el Canvas
+            weaponPointer.transform.position = screenPosition;
+        }
     }
 
-        void Shoot()
-        {
-            isWeaponLoading = true;
-            //anim.SetTrigger("Shoot");
-            selectedWeapon.weaponFeedback.PlayFeedbacks();
-            print("shoot");
-            RaycastHit hit;
+    void Shoot()
+    {
+        isWeaponLoading = true;
+        //anim.SetTrigger("Shoot");
+        selectedWeapon.weaponFeedback.PlayFeedbacks();
+        print("shoot");
+        RaycastHit hit;
 
-            if (Physics.Raycast(selectedWeapon.weaponPoint.transform.position, selectedWeapon.weaponPoint.transform.forward, out hit))
+        if (Physics.Raycast(selectedWeapon.weaponPoint.transform.position, selectedWeapon.weaponPoint.transform.forward, out hit))
+        {
+            print(hit.transform);
+            // Verifica si el objeto impactado tiene la etiqueta "enemy"
+            if (hit.transform.CompareTag("Enemy"))
             {
-                print(hit.transform);
-                // Verifica si el objeto impactado tiene la etiqueta "enemy"
-                if (hit.transform.CompareTag("Enemy"))
+                // Si el rifle está seleccionado, un solo disparo elimina al enemigo
+                EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
                 {
-                    // Si el rifle está seleccionado, un solo disparo elimina al enemigo
-                    EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
-                    if (enemyHealth != null)
-                    {
-                        enemyHealth.TakeDamage(2); // Reduce la salud del enemigo en 1
-                    }
+                    enemyHealth.TakeDamage(2); // Reduce la salud del enemigo en 1
                 }
             }
-            
         }
+    }
+
     void ChangeWeapon()
     {
         //health -= 20;
@@ -204,7 +213,6 @@ public class FPSController : MonoBehaviour
                 EnemyHealth enemyHealth = go.transform.GetComponent<EnemyHealth>();
                 if(curDistance<distance/2) enemyHealth.TakeDamage(2);
                 if(curDistance<distance/2) enemyHealth.TakeDamage(1);
-
 
             }
         }

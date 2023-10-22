@@ -39,7 +39,7 @@ public class DuckZombieMovement : MonoBehaviour
                 isChasingPlayer = true;
             }
 
-            if (isChasingPlayer)
+            if (isChasingPlayer && !GameManager.Instance.GamePaused)
             {
                 
 

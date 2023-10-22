@@ -6,7 +6,7 @@ public class FliyngDuckZombieMovement : MonoBehaviour
 {
     public Transform player;
     public float moveSpeed = 3.0f;
-    private bool isOnGround = false;
+    [SerializeField]private bool isOnGround = false;
     private bool isChasingPlayer = false;
 
     public float flyingSpeed = 5f; // Velocidad a la que se mueve el pato hacia el jugador
@@ -20,6 +20,7 @@ public class FliyngDuckZombieMovement : MonoBehaviour
         speed = flyingSpeed;
         // Busca el objeto con la etiqueta "Player" y asigna su transform al jugador.
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        
         //transform.LookAt(player);
     }
 
@@ -46,31 +47,30 @@ public class FliyngDuckZombieMovement : MonoBehaviour
             speed = diveSpeed;
         }
 
+        
+
+        if (isOnGround && !isChasingPlayer)
+        {
+            // Comienza a perseguir al jugador cuando está en el suelo.
+            GetComponent<Animator>().SetTrigger("Walk");
+            transform.LookAt(player);
+            isChasingPlayer = true;
+            speed = moveSpeed;
+        }
+
         transform.Translate(transform.forward * flyingSpeed * Time.deltaTime, Space.World);
 
 
         elapsedTime += Time.deltaTime;
+    }
 
-
-        // Verifica si el jugador existe.
-        if (player != null)
-        {
-            Vector3 moveDirection = Vector3.zero;
-
-            if (isOnGround && !isChasingPlayer)
-            {
-                // Comienza a perseguir al jugador cuando está en el suelo.
-                isChasingPlayer = true;
-            }
-
-            if (isChasingPlayer)
-            {
-
-
-                // Mueve al pato zombie en la dirección del jugador a la velocidad especificada.
-                transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
-            }
-        }
+    public void Fall()
+    {
+        GetComponent<Animator>().SetTrigger("Fall");
+        transform.rotation = Quaternion.Euler(90, 0, 0);
+        diving = true;
+        GetComponent<Animator>().SetTrigger("Picada");
+        speed = 30;
     }
 
     /*public void ()

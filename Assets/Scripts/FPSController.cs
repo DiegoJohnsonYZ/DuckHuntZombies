@@ -42,6 +42,11 @@ public class FPSController : MonoBehaviour
     public GameObject weaponPointShotgun;
     public GameObject weaponPointRifle;
     public PlayerInput playerInput;
+    
+    private int rifleShots = 0;
+    public MuertePato muertePato;
+    public EnemyHealth enemyHealth;
+    public GameObject weaponPointer;
 
 
     // Start is called before the first frame update
@@ -68,21 +73,55 @@ public class FPSController : MonoBehaviour
 
         Vector3 forward = transform.TransformDirection(selectedWeapon.weaponPoint.transform.forward) * 10;
         Debug.DrawRay(transform.position, forward, Color.green);
+        
+        // Obtén la dirección hacia donde apunta el arma seleccionada
+        Vector3 weaponDirection = selectedWeapon.weaponPoint.transform.forward;
+
+        // Calcula la posición en la pantalla donde debe estar el puntero
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(selectedWeapon.weaponPoint.transform.position + weaponDirection * 10f);
+
+        // Actualiza la posición del puntero en el Canvas
+        weaponPointer.transform.position = screenPosition;
 
     }
 
-    void Shoot()
-    {
-        isWeaponLoading = true;
-        //anim.SetTrigger("Shoot");
-        selectedWeapon.weaponFeedback.PlayFeedbacks();
-        print("shoot");
-        RaycastHit hit;
-        if (Physics.Raycast(selectedWeapon.weaponPoint.transform.position, selectedWeapon.weaponPoint.transform.forward, out hit))
+        void Shoot()
         {
-            print(hit.transform);
+            isWeaponLoading = true;
+            //anim.SetTrigger("Shoot");
+            selectedWeapon.weaponFeedback.PlayFeedbacks();
+            print("shoot");
+            RaycastHit hit;
+
+            if (Physics.Raycast(selectedWeapon.weaponPoint.transform.position, selectedWeapon.weaponPoint.transform.forward, out hit))
+            {
+                print(hit.transform);
+                // Verifica si el objeto impactado tiene la etiqueta "enemy"
+                if (hit.transform.CompareTag("Enemy"))
+                {
+                    // Dependiendo del arma seleccionada, determina el número de disparos necesarios
+                    if (selectedWeapon == rifle)
+                    {
+                        // Si el rifle está seleccionado, un solo disparo elimina al enemigo
+                        EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+                        if (enemyHealth != null)
+                        {
+                            enemyHealth.TakeDamage(2); // Reduce la salud del enemigo en 1
+                        }
+                    }
+                    else
+                    {
+                        // Si otro arma está seleccionada, necesitas dos disparos para eliminar al enemigo
+                        EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
+                        if (enemyHealth != null)
+                        {
+                            enemyHealth.TakeDamage(1); // Reduce la salud del enemigo en 1
+                        }
+                    }
+                }
+            }
+            
         }
-    }
     void ChangeWeapon()
     {
         selectedWeapon.anim.SetTrigger("Down");
@@ -109,4 +148,6 @@ public class FPSController : MonoBehaviour
     {
         isWeaponLoading = false;
     }
+    
+   
 }

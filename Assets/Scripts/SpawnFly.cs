@@ -23,46 +23,17 @@ public class SpawnFly : MonoBehaviour
         while (true)
         {
             GameObject duckZombiePrefab = duckZombiePrefabs[Random.Range(0, duckZombiePrefabs.Count)];
+            
             Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
             Vector3 spawnPosition = new Vector3(player.position.x + randomCircle.x, player.position.y + spawnAltitude, player.position.z + randomCircle.y);
             GameObject flyingDuckZombie = Instantiate(duckZombiePrefab, spawnPosition, Quaternion.identity);
-            
-            StartCoroutine(MoveTowardsPlayer(flyingDuckZombie));
+            float anguloAleatorio = Random.Range(0.0f, 360.0f);
+            flyingDuckZombie.transform.rotation = Quaternion.Euler(0, anguloAleatorio, 0);
             yield return new WaitForSeconds(spawnInterval);
         }
     }
 
-    private IEnumerator MoveTowardsPlayer(GameObject duck)
-    {
-        float elapsedTime = 0f;
-        bool diving = false;
-        float speed = flyingSpeed;
-        
-        while (true) // El pato volará durante 6 segundos
-        {
-            
-            if (duck == null)
-            {
-                yield break; // Salir de la rutina si el pato ha sido destruido
-            }
-            
-            // Check if it's time to initiate a dive attack
-            if (!diving && elapsedTime >= 6f)
-            {
-                duck.transform.LookAt(player);
-                diving = true;
-                print("picada");
-                duck.GetComponent<Animator>().SetTrigger("Picada");
-                speed = diveSpeed;
-            }
-
-            duck.transform.Translate(duck.transform.forward * flyingSpeed * Time.deltaTime, Space.World);
-
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-    }
-}
+   
     
     void DestroyDuck(GameObject duck)
     {

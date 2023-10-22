@@ -33,6 +33,8 @@ public class Weapon
 
 public class FPSController : MonoBehaviour
 {
+    public static FPSController instance;
+
     private float health= 100f;
     private int weaponIndex = 0;
     public bool isWeaponLoading = false;
@@ -61,6 +63,11 @@ public class FPSController : MonoBehaviour
     public EnemyHealth enemyHealth;
     public GameObject weaponPointer;
 
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -219,7 +226,7 @@ public class FPSController : MonoBehaviour
                 {
                     EnemyHealth enemyHealth = go.transform.GetComponent<EnemyHealth>();
                     if (curDistance < distance / 2) enemyHealth.TakeDamage(2);
-                    if (curDistance < distance / 2) enemyHealth.TakeDamage(1);
+                    else if (curDistance < distance) enemyHealth.TakeDamage(1);
 
 
                 }

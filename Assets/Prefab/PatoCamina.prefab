@@ -259,7 +259,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &92678697
 BoxCollider:
@@ -334,4 +334,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1282948277185346936, guid: 9f807201b916fa44a91b1203c1e5804c, type: 3}
   moveSpeed: 3
+  isChasingPlayer: 0
   hitsToKill: 2

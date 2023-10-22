@@ -31,6 +31,8 @@ public class SpawnFly : MonoBehaviour
             GameObject flyingDuckZombie = Instantiate(duckZombiePrefab, spawnPosition, Quaternion.identity);
             float anguloAleatorio = Random.Range(0.0f, 360.0f);
             flyingDuckZombie.transform.rotation = Quaternion.Euler(0, anguloAleatorio, 0);
+
+            yield return new WaitUntil(() => GameManager.Instance.GamePaused == false);
             yield return new WaitForSeconds(spawnInterval);
         }
     }

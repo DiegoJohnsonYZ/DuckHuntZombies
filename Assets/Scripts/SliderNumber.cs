@@ -8,13 +8,17 @@ public class SliderNumber : MonoBehaviour
     [SerializeField]
     private Text sliderNumber;
 
+    private Slider slider;
+
     void Start()
     {
-        this.GetComponent<Slider>().onValueChanged.AddListener(OnValueChange);
+        slider = this.GetComponent<Slider>();
+        slider.onValueChanged.AddListener(OnValueChange);
     }
 
     public void OnValueChange(float value)
     {
-        sliderNumber.text = ((int)value).ToString();
+        float multi = slider.wholeNumbers == false ? 10 : 1;
+        sliderNumber.text = ((int)(value * multi)).ToString();
     }
 }

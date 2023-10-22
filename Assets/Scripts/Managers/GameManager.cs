@@ -78,6 +78,6 @@ public class GameManager : Singleton<GameManager>
 
     public void OnSFXValueChange(float value)
     {
-        audioMixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20);
+        audioMixer.SetFloat("SfxVolume", Mathf.Log10(value) * 20);
     }
 }

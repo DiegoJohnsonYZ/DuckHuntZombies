@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duckZombiePrefabs:
   - {fileID: 4010594150877525218, guid: 43874c5c8ca81554a98299b9ac5506b4, type: 3}
-  player: {fileID: 1536814936}
+  player: {fileID: 0}
   spawnInterval: 5
   spawnRadius: 10
   spawnAltitude: 10
@@ -889,7 +889,7 @@ MonoBehaviour:
   duckZombiePrefabs:
   - {fileID: 3129643335285606609, guid: a78a07f0b82d8d148b2c164ef8299245, type: 3}
   - {fileID: 8620211809330714050, guid: c60c25d7eb9b96e4c9914e8edda483b3, type: 3}
-  player: {fileID: 1536814936}
+  player: {fileID: 0}
   spawnInterval: 2
   spawnAltitudeRange: 1
   minSpawnForce: 10
@@ -5920,12 +5920,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!4 &1536814936 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2184666698284893141, guid: 9f807201b916fa44a91b1203c1e5804c,
-    type: 3}
-  m_PrefabInstance: {fileID: 2184666699704069261}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1887279773
 PrefabInstance:
   m_ObjectHideFlags: 0

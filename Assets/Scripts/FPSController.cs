@@ -82,6 +82,7 @@ public class FPSController : MonoBehaviour
             selectedWeapon.bullets--;
             if (selectedWeapon.bullets >= 0)
             {
+                UIManager.instance.UpdateBulletCounter(weaponIndex,selectedWeapon.bullets, selectedWeapon.maxBullets);
                 if(selectedWeapon ==rifle)Shoot();
                 if(selectedWeapon ==shotgun)ShootEnemies();
             }else
@@ -142,6 +143,7 @@ public class FPSController : MonoBehaviour
     {
         //health -= 20;
         //TargetProgressBar.UpdateBar(health,0,100);
+        UIManager.instance.ChangeWeapon(weaponIndex);
         selectedWeapon.anim.SetTrigger("Down");
         if (weaponIndex == 0)
         {
@@ -168,6 +170,7 @@ public class FPSController : MonoBehaviour
         selectedWeapon.bullets = selectedWeapon.maxBullets;
         selectedWeapon.anim.SetTrigger("Down");
         MMSoundManagerSoundPlayEvent.Trigger(selectedWeapon.reloadSound,MMSoundManager.MMSoundManagerTracks.Sfx,this.transform.position);
+        UIManager.instance.ReloadWeapon(weaponIndex,selectedWeapon.maxBullets, selectedWeapon.reloadTime);
         Invoke("UpWeapon", selectedWeapon.reloadTime);
     }
 
@@ -196,17 +199,23 @@ public class FPSController : MonoBehaviour
         Vector3 position = selectedWeapon.weaponPoint.transform.position;
         foreach (GameObject go in gos)
         {
-            Vector3 diff = go.transform.position - position;
-            float curDistance = diff.sqrMagnitude;
-            print(curDistance);
-            if (curDistance < distance)
+            print("ANGULO! " + Vector3.Angle((go.transform.position - transform.position), selectedWeapon.weaponPoint.transform.forward));
+            if (Vector3.Angle((go.transform.position - transform.position), selectedWeapon.weaponPoint.transform.forward) < 45)
             {
-                EnemyHealth enemyHealth = go.transform.GetComponent<EnemyHealth>();
-                if(curDistance<distance/2) enemyHealth.TakeDamage(2);
-                if(curDistance<distance/2) enemyHealth.TakeDamage(1);
+                Vector3 diff = go.transform.position - position;
+                float curDistance = diff.sqrMagnitude;
+                print(curDistance);
+                if (curDistance < distance)
+                {
+                    EnemyHealth enemyHealth = go.transform.GetComponent<EnemyHealth>();
+                    if (curDistance < distance / 2) enemyHealth.TakeDamage(2);
+                    if (curDistance < distance / 2) enemyHealth.TakeDamage(1);
 
 
+                }
             }
+
+            
         }
     }
 

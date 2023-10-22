@@ -11,12 +11,14 @@ GameObject:
   - component: {fileID: 3039636504743087568}
   - component: {fileID: 2413239229504174947}
   - component: {fileID: 5042643523160240115}
-  - component: {fileID: 8912943278777792390}
+  - component: {fileID: 6736265139758199586}
   - component: {fileID: 8046692105782718887}
   - component: {fileID: 3767401236522619710}
+  - component: {fileID: 3802069375061465742}
+  - component: {fileID: 2026873054614323430}
   m_Layer: 0
   m_Name: Patito
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,8 +88,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8912943278777792390
-CapsuleCollider:
+--- !u!65 &6736265139758199586
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -96,9 +98,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 1.9999999, z: 1.0000001}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8046692105782718887
 Rigidbody:
@@ -128,5 +129,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67d84d2abc42db4ea96bbc7036ce6e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1282948277185346936, guid: 9f807201b916fa44a91b1203c1e5804c, type: 3}
   moveSpeed: 3
+  hitsToKill: 2
+--- !u!114 &3802069375061465742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8620211809330714050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d0929e7e46e344eba32278d6c41df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2026873054614323430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8620211809330714050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bdba82549e5c7642afed1a05b58acbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2

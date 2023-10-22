@@ -11,6 +11,7 @@ public class SpawnFly : MonoBehaviour
     public float spawnAltitude = 10f;
     public float flyingSpeed = 5f; // Velocidad a la que se mueve el pato hacia el jugador
     public float diveSpeed = 10f; // Velocidad de ataque en picada
+    private bool shouldDestroy = false; // Variable para indicar que se debe destruir el pato
 
     private void Start()
     {
@@ -37,6 +38,10 @@ public class SpawnFly : MonoBehaviour
 
         while (elapsedTime < 6f) // El pato volará durante 6 segundos
         {
+            if (duck == null)
+            {
+                yield break; // Salir de la rutina si el pato ha sido destruido
+            }
             Vector3 directionToPlayer = (player.position - duck.transform.position).normalized;
             duck.transform.Translate(directionToPlayer * flyingSpeed * Time.deltaTime);
 
@@ -56,5 +61,11 @@ public class SpawnFly : MonoBehaviour
             yield return null;
     }
 }
+    
+    void DestroyDuck(GameObject duck)
+    {
+        shouldDestroy = true;
+    }
+
     
 }

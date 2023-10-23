@@ -23,7 +23,7 @@ public class SpawnFly : MonoBehaviour
     {
         while (true)
         {
-            if (breakTime) continue;
+            
             yield return new WaitUntil(() => GameManager.Instance.GamePaused == false);
 
             GameObject duckZombiePrefab = duckZombiePrefabs[Random.Range(0, duckZombiePrefabs.Count)];
@@ -34,7 +34,7 @@ public class SpawnFly : MonoBehaviour
             float anguloAleatorio = Random.Range(0.0f, 360.0f);
             flyingDuckZombie.transform.rotation = Quaternion.Euler(0, anguloAleatorio, 0);
 
-            yield return new WaitUntil(() => GameManager.Instance.GamePaused == false);
+            yield return new WaitUntil(() => GameManager.Instance.GamePaused == false || !breakTime);
             yield return new WaitForSeconds(spawnInterval);
         }
     }

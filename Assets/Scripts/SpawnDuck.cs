@@ -25,7 +25,6 @@ public class SpawnDuck : MonoBehaviour
     {
         while (true)
         {
-            if (breakTime) continue;
 
             yield return new WaitUntil(() => GameManager.Instance.GamePaused == false);
 
@@ -65,7 +64,7 @@ public class SpawnDuck : MonoBehaviour
             Rigidbody duckRigidbody = duckZombie.GetComponent<Rigidbody>();
             duckRigidbody.AddForce(Vector3.up * randomForce, ForceMode.Impulse);
 
-            yield return new WaitUntil(() => GameManager.Instance.GamePaused == false);
+            yield return new WaitUntil(() => GameManager.Instance.GamePaused == false || !breakTime);
             yield return new WaitForSeconds(spawnInterval);            
         }
     }

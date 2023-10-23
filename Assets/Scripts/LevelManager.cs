@@ -60,7 +60,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         eventList = new List<Evento>();
-        eventList.Add(new Evento(20f, 20f, "Rain", "Fog coming!"));
+        eventList.Add(new Evento(20f, 20f, "Rain", "Rain coming!"));
         eventList.Add(new Evento(30f, 15f, "Horde", "Horde coming!"));
         eventList.Add(new Evento(50f, 5f, "Break", "Break time"));
         eventList.Add(new Evento(55f, 1f, "Break", "Break is over!"));
@@ -88,7 +88,7 @@ public class LevelManager : MonoBehaviour
                 case "Rain":
                     rain.Play();
                     Invoke("TurnOffRain",eventList[iterator].duration);
-                    //play rain sound
+                    rain.gameObject.GetComponent<AudioSource>().Play();
                     break;
                 case "Fog":
                     fog.Play();
@@ -137,6 +137,7 @@ public class LevelManager : MonoBehaviour
     private void TurnOffRain()
     {
         rain.Stop();
+        rain.gameObject.GetComponent<AudioSource>().Stop();
     }
     private void TurnOffFog()
     {

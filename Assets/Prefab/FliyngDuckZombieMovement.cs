@@ -43,41 +43,37 @@ public class FliyngDuckZombieMovement : MonoBehaviour
     }
 
 
-
     private void Update()
     {
-        
-
-        // Check if it's time to initiate a dive attack
-        if (!diving && elapsedTime >= 6f)
+        if (GameManager.Instance.GamePaused == false)
         {
-            transform.LookAt(player);
-            diving = true;
-            print("picada");
-            GetComponent<Animator>().SetTrigger("Picada");
-            speed = diveSpeed;
+            // Check if it's time to initiate a dive attack
+            if (!diving && elapsedTime >= 6f)
+            {
+                transform.LookAt(player);
+                diving = true;
+                print("picada");
+                GetComponent<Animator>().SetTrigger("Picada");
+                speed = diveSpeed;
+            }
+
+            if (isOnGround && !isChasingPlayer)
+            {
+                // Comienza a perseguir al jugador cuando está en el suelo.
+                GetComponent<Animator>().SetTrigger("Walk");
+                transform.LookAt(player);
+                isChasingPlayer = true;
+                speed = moveSpeed;
+            }
+
+            transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+
+            elapsedTime += Time.deltaTime;
         }
-
-        
-
-        if (isOnGround && !isChasingPlayer)
-        {
-            // Comienza a perseguir al jugador cuando está en el suelo.
-            GetComponent<Animator>().SetTrigger("Walk");
-            transform.LookAt(player);
-            isChasingPlayer = true;
-            speed = moveSpeed;
-        }
-
-        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
-
-
-        elapsedTime += Time.deltaTime;
     }
 
     public void Fall()
-    {
-        
+    {       
         GetComponent<Animator>().SetTrigger("Fall");
         
         //transform.rotation = Quaternion.Euler(90, 0, 0);

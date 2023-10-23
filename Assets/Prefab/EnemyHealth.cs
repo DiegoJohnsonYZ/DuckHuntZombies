@@ -45,7 +45,7 @@ public class EnemyHealth : MonoBehaviour
         Destroy(particleSystem.gameObject, timeDuration);
     }
 
-    public   void Die()
+    public void Die()
     {
         // Realiza las acciones necesarias cuando el enemigo muere, como reproducir una animación, efectos de sonido, etc.
         // En este ejemplo, simplemente se destruye el objeto.

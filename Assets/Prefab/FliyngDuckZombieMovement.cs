@@ -5,19 +5,16 @@ using UnityEngine;
 public class FliyngDuckZombieMovement : MonoBehaviour
 {
     public Transform player;
-    public float moveSpeed = 3.0f;
     [SerializeField]private bool isOnGround = false;
     private bool isChasingPlayer = false;
-
-    public float flyingSpeed = 5f; // Velocidad a la que se mueve el pato hacia el jugador
-    public float diveSpeed = 10f; // Velocidad de ataque en picada
 
     float elapsedTime = 0f;
     bool diving = false;
     float speed;
     private void Start()
     {
-        speed = flyingSpeed;
+        speed = LevelManager.instance.flyingSpeed;
+
         // Busca el objeto con la etiqueta "Player" y asigna su transform al jugador.
         player = GameObject.FindGameObjectWithTag("Player").transform;
         
@@ -55,7 +52,7 @@ public class FliyngDuckZombieMovement : MonoBehaviour
             diving = true;
             print("picada");
             GetComponent<Animator>().SetTrigger("Picada");
-            speed = diveSpeed;
+            speed = LevelManager.instance.flyingSpeed;
         }
 
         
@@ -66,7 +63,7 @@ public class FliyngDuckZombieMovement : MonoBehaviour
             GetComponent<Animator>().SetTrigger("Walk");
             transform.LookAt(player);
             isChasingPlayer = true;
-            speed = moveSpeed;
+            speed = LevelManager.instance.walkingSpeed;
         }
 
         transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);

@@ -61,11 +61,13 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
 
+        /*
         print("hit");
         ParticleSystem particleSystem = Instantiate(blood, this.transform.position, new Quaternion(0, 0, 0, 0));
         float timeDuration = particleSystem.main.duration + particleSystem.main.startLifetime.constantMax;
         print(timeDuration);
         Destroy(particleSystem.gameObject, timeDuration);
+        */
     }
 
     public void Die()

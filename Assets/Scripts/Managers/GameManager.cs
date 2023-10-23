@@ -8,6 +8,8 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using MoreMountains.Tools;
+using MoreMountains.Feedbacks;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -31,6 +33,10 @@ public class GameManager : Singleton<GameManager>
     [Header("Game Over")]
     [SerializeField]
     private GameObject gameOverContainer;
+    [SerializeField]
+    private MMFeedbacks gameOverFeedback;
+    [SerializeField]
+    private MMFeedbacks winFeedback;
 
     [Header("Post-Processing")]
     [SerializeField]
@@ -98,12 +104,14 @@ public class GameManager : Singleton<GameManager>
 
     public void EndLevel()
     {
+        winFeedback.PlayFeedbacks();
         gameOverContainer.SetActive(true);
         depthOfField.active = true;
     }
 
     public void GameOver()
     {
+        gameOverFeedback.PlayFeedbacks();
         gameOverContainer.SetActive(true);
         depthOfField.active = true;
     }

@@ -9,9 +9,6 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField]
-    private GameObject mainMenu;
-
     [Header("Settings")]
     [SerializeField]
     private GameObject settings;

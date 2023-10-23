@@ -5,7 +5,6 @@ using UnityEngine;
 public class DuckZombieMovement : MonoBehaviour
 {
     public Transform player;
-    public float moveSpeed = 3.0f;
     private bool isOnGround = false;
     [SerializeField]private bool isChasingPlayer = false;
     public int hitsToKill = 2; // Cambia esto según tus necesidades (2 para dos hits)
@@ -44,7 +43,7 @@ public class DuckZombieMovement : MonoBehaviour
                 
 
                 // Mueve al pato zombie en la dirección del jugador a la velocidad especificada.
-                transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
+                transform.Translate(transform.forward * LevelManager.instance.walkingSpeed * Time.deltaTime, Space.World);
             }
         }
     }

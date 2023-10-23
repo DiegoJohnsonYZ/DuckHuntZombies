@@ -202,8 +202,18 @@ public class FPSController : MonoBehaviour
     {
         health -= 20;
         TargetProgressBar.UpdateBar(health,0,100);
+
+        if (health <= 0)
+        {
+            PlayerDie();
+        }
     }
 
+    private void PlayerDie()
+    {
+        GameManager.Instance.GamePaused = true;
+        GameManager.Instance.GameOver();
+    }
 
     public void FinishLoadWeapon()
     {

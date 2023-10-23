@@ -18,7 +18,9 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
 
-        quackSequence = DOTween.Sequence().AppendCallback(() => enemySound.Play()).AppendInterval(3f).SetLoops(-1, LoopType.Yoyo).SetId("quack");
+        quackSequence = DOTween.Sequence().AppendCallback(() => enemySound.Play()).AppendInterval(3f).SetLoops(-1, LoopType.Yoyo).SetId("quack").Pause();
+
+        quackSequence.Play();
     }
 
     private void Update()
@@ -26,12 +28,12 @@ public class EnemyHealth : MonoBehaviour
         if (GameManager.Instance.GamePaused && !gamePause)
         {
             gamePause = true;
-            DOTween.Pause(quackSequence);
+            quackSequence.Kill();
         }
         else if (!GameManager.Instance.GamePaused && gamePause)
         {
             gamePause = false;
-            DOTween.Restart(quackSequence);
+            quackSequence.Play();
         }
     }
 

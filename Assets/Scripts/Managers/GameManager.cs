@@ -6,9 +6,16 @@ using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField]
+    private AudioSource introAudioSource;
+    [SerializeField]
+    private AudioSource mainAudioSource;
+    
     [Header("Settings")]
     [SerializeField]
     private GameObject settings;
@@ -21,6 +28,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private AudioMixer audioMixer;
 
+    [Header("Game Over")]
+    [SerializeField]
+    private GameObject gameOverContainer;
+
     [Header("Post-Processing")]
     [SerializeField]
     private Volume globalVolume;
@@ -29,6 +40,8 @@ public class GameManager : Singleton<GameManager>
     private DepthOfField depthOfField;
 
     private int mouseSensitivity = 5;
+    private bool startLoop = false;
+    private float levelDuration = 150f;
 
     public bool GamePaused { get => gamePaused; set => gamePaused = value; }
     public int MouseSensitivity { get => mouseSensitivity; set => mouseSensitivity = value; }
@@ -40,6 +53,17 @@ public class GameManager : Singleton<GameManager>
         sensitivitySlider.onValueChanged.AddListener(OnSensitivityValueChange);
         musicSlider.onValueChanged.AddListener(OnMusicValueChange);
         sfxSlider.onValueChanged.AddListener(OnSFXValueChange);
+
+        DOTween.Sequence().AppendInterval(levelDuration).AppendCallback(() => EndLevel());
+    }
+
+    void Update()
+    {
+        if (!introAudioSource.isPlaying && !startLoop)
+        {
+            mainAudioSource.Play();
+            startLoop = true;
+        }
     }
 
     public void OnSettingsButtonPressed()
@@ -70,5 +94,32 @@ public class GameManager : Singleton<GameManager>
     public void OnSFXValueChange(float value)
     {
         audioMixer.SetFloat("SfxVolume", Mathf.Log10(value) * 20);
+    }
+
+    public void EndLevel()
+    {
+        gameOverContainer.SetActive(true);
+        depthOfField.active = true;
+    }
+
+    public void GameOver()
+    {
+        gameOverContainer.SetActive(true);
+        depthOfField.active = true;
+    }
+
+    public void OnPlayAgainButtonClicked()
+    {
+        SceneManager.LoadScene("Gameplay");
+    }
+
+    public void OnBackMenuButtonClicked()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void OnExitGameButtonClicked()
+    {
+        Application.Quit();
     }
 }

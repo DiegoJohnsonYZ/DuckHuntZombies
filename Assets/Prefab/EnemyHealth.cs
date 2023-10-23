@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     public AudioSource enemySound;
     Sequence quackSequence;
 
+
     private void Start()
     {
         currentHealth = maxHealth;

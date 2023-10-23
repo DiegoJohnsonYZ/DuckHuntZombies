@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public class Evento
+{
+    public float time;
+    public float duration;
+    public string type;
+    public string message;
+}
+
+
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
@@ -21,6 +31,9 @@ public class LevelManager : MonoBehaviour
 
     private float elapsedTime = 0;
 
+    [Header("Eventos")]
+    public List<Evento>() 
+
     private void Awake()
     {
         instance = this;
@@ -29,6 +42,8 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         elapsedTime += Time.deltaTime;
+        
+
 
 
 

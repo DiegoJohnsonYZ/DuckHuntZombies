@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -40,6 +41,7 @@ public class GameManager : Singleton<GameManager>
 
     private int mouseSensitivity = 5;
     private bool startLoop = false;
+    private float levelDuration = 150f;
 
     public bool GamePaused { get => gamePaused; set => gamePaused = value; }
     public int MouseSensitivity { get => mouseSensitivity; set => mouseSensitivity = value; }
@@ -51,6 +53,8 @@ public class GameManager : Singleton<GameManager>
         sensitivitySlider.onValueChanged.AddListener(OnSensitivityValueChange);
         musicSlider.onValueChanged.AddListener(OnMusicValueChange);
         sfxSlider.onValueChanged.AddListener(OnSFXValueChange);
+
+        DOTween.Sequence().AppendInterval(levelDuration).AppendCallback(() => EndLevel());
     }
 
     void Update()
@@ -90,6 +94,12 @@ public class GameManager : Singleton<GameManager>
     public void OnSFXValueChange(float value)
     {
         audioMixer.SetFloat("SfxVolume", Mathf.Log10(value) * 20);
+    }
+
+    public void EndLevel()
+    {
+        gameOverContainer.SetActive(true);
+        depthOfField.active = true;
     }
 
     public void GameOver()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -8,10 +9,14 @@ public class EnemyHealth : MonoBehaviour
     private int currentHealth; // Salud actual del enemigo
     public ParticleSystem blood;
     public int duckType;
+    public AudioSource enemySound;
+    Sequence quackSequence;
 
     private void Start()
     {
         currentHealth = maxHealth;
+
+        quackSequence = DOTween.Sequence().AppendCallback(() => enemySound.Play()).AppendInterval(3f).SetLoops(-1, LoopType.Yoyo).SetId("quack");
     }
 
     public void TakeDamage(int damage)
@@ -47,6 +52,11 @@ public class EnemyHealth : MonoBehaviour
 
     public void Die()
     {
+        if (DOTween.IsTweening(quackSequence))
+        {
+            quackSequence.Kill();
+        }
+
         // Realiza las acciones necesarias cuando el enemigo muere, como reproducir una animación, efectos de sonido, etc.
         // En este ejemplo, simplemente se destruye el objeto.
         Destroy(gameObject);

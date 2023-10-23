@@ -18,9 +18,6 @@ public class UIManager : MonoBehaviour
     public MMProgressBar shotgunBulletBar;
     public MMFeedbacks shotgunBulletBarFeedbacks;
 
-
-
-
     private void Awake()
     {
         instance = this;

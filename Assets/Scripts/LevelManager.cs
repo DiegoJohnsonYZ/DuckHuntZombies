@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour
     private float elapsedTime = 0;
 
     [Header("Eventos")]
-    public List<Evento>() 
+    public List<Evento> eventList;   
 
     private void Awake()
     {

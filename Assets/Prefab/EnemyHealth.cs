@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour
     public int duckType;
     public AudioSource enemySound;
     Sequence quackSequence;
+    private bool gamePause = false;
 
 
     private void Start()
@@ -18,6 +19,20 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
 
         quackSequence = DOTween.Sequence().AppendCallback(() => enemySound.Play()).AppendInterval(3f).SetLoops(-1, LoopType.Yoyo).SetId("quack");
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.GamePaused && !gamePause)
+        {
+            gamePause = true;
+            DOTween.Pause(quackSequence);
+        }
+        else if (!GameManager.Instance.GamePaused && gamePause)
+        {
+            gamePause = false;
+            DOTween.Restart(quackSequence);
+        }
     }
 
     public void TakeDamage(int damage)

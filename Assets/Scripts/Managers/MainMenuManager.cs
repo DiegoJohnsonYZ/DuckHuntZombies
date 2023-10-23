@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField]
+    private AudioSource introAudioSource;
+    [SerializeField]
+    private AudioSource mainAudioSource;
+
+    [SerializeField]
     RectTransform titleRect;
     [SerializeField]
     RectTransform playButtonRect;
@@ -14,6 +19,8 @@ public class MainMenuManager : MonoBehaviour
     RectTransform creditsButtonsRect;
     [SerializeField]
     GameObject creditsPanel;
+
+    private bool startLoop = false;
 
     private void Start()
     {
@@ -29,6 +36,15 @@ public class MainMenuManager : MonoBehaviour
                 creditsButtonsRect.DORotate(new Vector3(0f, 0f, 0f), 1f).SetEase(Ease.OutBack);
                 creditsButtonsRect.DOAnchorPosY(-670, 1f).SetEase(Ease.OutBack);
             });
+    }
+
+    void Update()
+    {
+        if (!introAudioSource.isPlaying && !startLoop)
+        {
+            mainAudioSource.Play();
+            startLoop = true;
+        }
     }
 
     public void OnPlayButtonClicked()

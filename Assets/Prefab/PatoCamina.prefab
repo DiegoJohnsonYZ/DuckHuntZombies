@@ -319,9 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bdba82549e5c7642afed1a05b58acbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
-  blood: {fileID: 0}
-  duckType: 0
+  maxHealth: 2
 --- !u!114 &1313772102125394534
 MonoBehaviour:
   m_ObjectHideFlags: 0

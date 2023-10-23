@@ -79,39 +79,42 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         elapsedTime += Time.deltaTime;
-        
-        if(elapsedTime > eventList[iterator].time)
+        if (iterator < eventList.Count)
         {
-            ShowNotification(eventList[iterator].message);
-            switch (eventList[iterator].type)
+            if (elapsedTime > eventList[iterator].time)
             {
-                case "Rain":
-                    rain.Play();
-                    Invoke("TurnOffRain",eventList[iterator].duration);
-                    rain.gameObject.GetComponent<AudioSource>().Play();
-                    break;
-                case "Fog":
-                    fog.Play();
-                    Invoke("TurnOffFog", eventList[iterator].duration);
-                    break;
-                case "Horde":
-                    duckSpawner.spawnInterval = 6f;
-                    flyDuckSpawner.spawnInterval = 5f;
-                    Invoke("FinishHorde", eventList[iterator].duration);
-                    break;
-                case "Break":
-                    duckSpawner.breakTime = true;
-                    flyDuckSpawner.breakTime = true;
-                    
-                    break;
-                case "BreakOver":
-                    duckSpawner.breakTime = false;
-                    flyDuckSpawner.breakTime = false;
-                    break;
-            }
-            iterator++;
+                ShowNotification(eventList[iterator].message);
+                switch (eventList[iterator].type)
+                {
+                    case "Rain":
+                        rain.Play();
+                        Invoke("TurnOffRain", eventList[iterator].duration);
+                        rain.gameObject.GetComponent<AudioSource>().Play();
+                        break;
+                    case "Fog":
+                        fog.Play();
+                        Invoke("TurnOffFog", eventList[iterator].duration);
+                        break;
+                    case "Horde":
+                        duckSpawner.spawnInterval = 6f;
+                        flyDuckSpawner.spawnInterval = 5f;
+                        Invoke("FinishHorde", eventList[iterator].duration);
+                        break;
+                    case "Break":
+                        duckSpawner.breakTime = true;
+                        flyDuckSpawner.breakTime = true;
 
+                        break;
+                    case "BreakOver":
+                        duckSpawner.breakTime = false;
+                        flyDuckSpawner.breakTime = false;
+                        break;
+                }
+                iterator++;
+
+            }
         }
+        
 
 
 

@@ -205,7 +205,7 @@ public class FPSController : MonoBehaviour
 
         if (health <= 0)
         {
-            //PlayerDie();
+            PlayerDie();
         }
     }
 

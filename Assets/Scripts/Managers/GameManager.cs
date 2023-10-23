@@ -9,9 +9,6 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField]
-    private GameObject mainMenu;
-
     [Header("Settings")]
     [SerializeField]
     private GameObject settings;
@@ -28,7 +25,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private Volume globalVolume;
 
-    private bool gamePaused = true;        
+    private bool gamePaused = false;        
     private DepthOfField depthOfField;
 
     private int mouseSensitivity = 5;
@@ -42,13 +39,6 @@ public class GameManager : Singleton<GameManager>
         sensitivitySlider.onValueChanged.AddListener(OnSensitivityValueChange);
         musicSlider.onValueChanged.AddListener(OnMusicValueChange);
         sfxSlider.onValueChanged.AddListener(OnSFXValueChange);
-    }
-
-    public void OnPlayButtonClicked()
-    {
-        mainMenu.SetActive(false);
-        depthOfField.active = false;
-        gamePaused = false;
     }
 
     public void OnSettingsButtonPressed()
@@ -78,6 +68,6 @@ public class GameManager : Singleton<GameManager>
 
     public void OnSFXValueChange(float value)
     {
-        audioMixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20);
+        audioMixer.SetFloat("SfxVolume", Mathf.Log10(value) * 20);
     }
 }

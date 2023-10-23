@@ -36,13 +36,9 @@ public class SpawnFly : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-
-   
-    
+ 
     void DestroyDuck(GameObject duck)
     {
         shouldDestroy = true;
-    }
-
-    
+    }  
 }

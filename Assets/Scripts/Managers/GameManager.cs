@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private Volume globalVolume;
 
-    private bool gamePaused = true;        
+    private bool gamePaused = false;        
     private DepthOfField depthOfField;
 
     private int mouseSensitivity = 5;
@@ -42,13 +42,6 @@ public class GameManager : Singleton<GameManager>
         sensitivitySlider.onValueChanged.AddListener(OnSensitivityValueChange);
         musicSlider.onValueChanged.AddListener(OnMusicValueChange);
         sfxSlider.onValueChanged.AddListener(OnSFXValueChange);
-    }
-
-    public void OnPlayButtonClicked()
-    {
-        mainMenu.SetActive(false);
-        depthOfField.active = false;
-        gamePaused = false;
     }
 
     public void OnSettingsButtonPressed()

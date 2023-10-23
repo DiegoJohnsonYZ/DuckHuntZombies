@@ -51,7 +51,7 @@ public class FliyngDuckZombieMovement : MonoBehaviour
                 diving = true;
                 print("picada");
                 GetComponent<Animator>().SetTrigger("Picada");
-                speed = diveSpeed;
+                speed = LevelManager.instance.flyingSpeed;
             }
 
             if (isOnGround && !isChasingPlayer)
@@ -60,7 +60,7 @@ public class FliyngDuckZombieMovement : MonoBehaviour
                 GetComponent<Animator>().SetTrigger("Walk");
                 transform.LookAt(player);
                 isChasingPlayer = true;
-                speed = moveSpeed;
+                speed = LevelManager.instance.walkingSpeed;
             }
 
             transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);

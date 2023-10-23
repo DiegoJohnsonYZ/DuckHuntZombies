@@ -9,6 +9,11 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField]
+    private AudioSource introAudioSource;
+    [SerializeField]
+    private AudioSource mainAudioSource;
+    
     [Header("Settings")]
     [SerializeField]
     private GameObject settings;
@@ -29,6 +34,7 @@ public class GameManager : Singleton<GameManager>
     private DepthOfField depthOfField;
 
     private int mouseSensitivity = 5;
+    private bool startLoop = false;
 
     public bool GamePaused { get => gamePaused; set => gamePaused = value; }
     public int MouseSensitivity { get => mouseSensitivity; set => mouseSensitivity = value; }
@@ -40,6 +46,15 @@ public class GameManager : Singleton<GameManager>
         sensitivitySlider.onValueChanged.AddListener(OnSensitivityValueChange);
         musicSlider.onValueChanged.AddListener(OnMusicValueChange);
         sfxSlider.onValueChanged.AddListener(OnSFXValueChange);
+    }
+
+    void Update()
+    {
+        if (!introAudioSource.isPlaying && !startLoop)
+        {
+            mainAudioSource.Play();
+            startLoop = true;
+        }
     }
 
     public void OnSettingsButtonPressed()

@@ -12,6 +12,7 @@ public class SpawnFly : MonoBehaviour
     public float flyingSpeed = 5f; // Velocidad a la que se mueve el pato hacia el jugador
     public float diveSpeed = 10f; // Velocidad de ataque en picada
     private bool shouldDestroy = false; // Variable para indicar que se debe destruir el pato
+    public bool breakTime = false;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class SpawnFly : MonoBehaviour
     {
         while (true)
         {
+            if (breakTime) continue;
             yield return new WaitUntil(() => GameManager.Instance.GamePaused == false);
 
             GameObject duckZombiePrefab = duckZombiePrefabs[Random.Range(0, duckZombiePrefabs.Count)];

@@ -13,6 +13,7 @@ public class SpawnDuck : MonoBehaviour
     //public float spawnForce = 10f; // Fuerza de impulso
     public float minSpawnForce = 5f; // Fuerza de impulso mínima
     public float maxSpawnForce = 15f; // Fuerza de impulso máxima
+    public bool breakTime = false;
 
     private void Start()
     {
@@ -24,6 +25,8 @@ public class SpawnDuck : MonoBehaviour
     {
         while (true)
         {
+            if (breakTime) continue;
+
             yield return new WaitUntil(() => GameManager.Instance.GamePaused == false);
 
             // Calcula múltiples posiciones en el borde del plano

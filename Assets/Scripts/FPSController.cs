@@ -73,8 +73,8 @@ public class FPSController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Confined;
-        shotgun = new Weapon(4,4,2f, shotgunFeedback,weaponPointShotgun,reloadShotgun);
-        rifle = new Weapon(6,6,3f, rifleFeedback,weaponPointRifle,reloadRifle);
+        shotgun = new Weapon(4,4,1.3f, shotgunFeedback,weaponPointShotgun,reloadShotgun);
+        rifle = new Weapon(6,6,1.3f, rifleFeedback,weaponPointRifle,reloadRifle);
         selectedWeapon = rifle;
         shotgun.anim.SetTrigger("Down");
         playerInput = GetComponent<PlayerInput>();
@@ -145,11 +145,18 @@ public class FPSController : MonoBehaviour
             // Verifica si el objeto impactado tiene la etiqueta "enemy"
             if (hit.transform.CompareTag("Enemy"))
             {
-                // Si el rifle está seleccionado, un solo disparo elimina al enemigo
+                int damage = 2;
+                int distance = 70;
+                Vector3 diff = hit.transform.position - selectedWeapon.weaponPoint.transform.position; 
+                float curDistance = diff.sqrMagnitude;
+                print(curDistance);
+                if (curDistance > distance) damage = 4;
+
+                    // Si el rifle está seleccionado, un solo disparo elimina al enemigo
                 EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
                 if (enemyHealth != null)
                 {
-                    enemyHealth.TakeDamage(2); // Reduce la salud del enemigo en 1
+                    enemyHealth.TakeDamage(damage); // Reduce la salud del enemigo en 1
                 }
             }
         }
@@ -217,7 +224,7 @@ public class FPSController : MonoBehaviour
         foreach (GameObject go in gos)
         {
             print("ANGULO! " + Vector3.Angle((go.transform.position - transform.position), selectedWeapon.weaponPoint.transform.forward));
-            if (Vector3.Angle((go.transform.position - transform.position), selectedWeapon.weaponPoint.transform.forward) < 45)
+            if (Vector3.Angle((go.transform.position - transform.position), selectedWeapon.weaponPoint.transform.forward) < 60)
             {
                 Vector3 diff = go.transform.position - position;
                 float curDistance = diff.sqrMagnitude;
@@ -225,7 +232,7 @@ public class FPSController : MonoBehaviour
                 if (curDistance < distance)
                 {
                     EnemyHealth enemyHealth = go.transform.GetComponent<EnemyHealth>();
-                    if (curDistance < distance / 2) enemyHealth.TakeDamage(2);
+                    if (curDistance < distance / 2) enemyHealth.TakeDamage(4);
                     else if (curDistance < distance) enemyHealth.TakeDamage(1);
 
 

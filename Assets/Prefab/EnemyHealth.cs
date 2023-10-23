@@ -7,7 +7,6 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth = 7; // Salud máxima del enemigo
     private int currentHealth; // Salud actual del enemigo
     public ParticleSystem blood;
-    public int duckType;
 
     private void Start()
     {
@@ -17,25 +16,13 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Vector3 dir = ((transform.position - FPSController.instance.transform.position).normalized);
-        if(duckType == 1)
-        {
-            FliyngDuckZombieMovement fDuck = GetComponent<FliyngDuckZombieMovement>();
-            
-            fDuck.Fall();
-        }
-        
         print("DIRECCION" + dir);
-        if (duckType == 0)
-        {
-            GetComponent<Rigidbody>().AddForce(dir * 15, ForceMode.Impulse);
-            GetComponent<Animator>().SetTrigger("Hurt");
-        }
-            
+        GetComponent<Rigidbody>().AddForce(dir*15,ForceMode.Impulse);
         currentHealth -= damage;
 
         if (currentHealth <= 0)
         {
-            Die();
+            //Die();
         }
 
         print("hit");

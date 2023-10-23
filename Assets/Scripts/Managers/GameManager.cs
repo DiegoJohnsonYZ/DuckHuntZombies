@@ -36,6 +36,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         globalVolume.profile.TryGet(out depthOfField);
+        depthOfField.active = false;
         sensitivitySlider.onValueChanged.AddListener(OnSensitivityValueChange);
         musicSlider.onValueChanged.AddListener(OnMusicValueChange);
         sfxSlider.onValueChanged.AddListener(OnSFXValueChange);

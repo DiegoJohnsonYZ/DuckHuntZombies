@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -25,6 +26,10 @@ public class GameManager : Singleton<GameManager>
     private Slider sfxSlider;
     [SerializeField]
     private AudioMixer audioMixer;
+
+    [Header("Game Over")]
+    [SerializeField]
+    private GameObject gameOverContainer;
 
     [Header("Post-Processing")]
     [SerializeField]
@@ -85,5 +90,26 @@ public class GameManager : Singleton<GameManager>
     public void OnSFXValueChange(float value)
     {
         audioMixer.SetFloat("SfxVolume", Mathf.Log10(value) * 20);
+    }
+
+    public void GameOver()
+    {
+        gameOverContainer.SetActive(true);
+        depthOfField.active = true;
+    }
+
+    public void OnPlayAgainButtonClicked()
+    {
+        SceneManager.LoadScene("Gameplay");
+    }
+
+    public void OnBackMenuButtonClicked()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void OnExitGameButtonClicked()
+    {
+        Application.Quit();
     }
 }

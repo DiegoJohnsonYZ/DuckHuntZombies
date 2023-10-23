@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     public AudioSource enemySound;
     Sequence quackSequence;
 
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -22,13 +23,25 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Vector3 dir = ((transform.position - FPSController.instance.transform.position).normalized);
+        if(duckType == 1)
+        {
+            FliyngDuckZombieMovement fDuck = GetComponent<FliyngDuckZombieMovement>();
+            
+            fDuck.Fall();
+        }
+        
         print("DIRECCION" + dir);
-        GetComponent<Rigidbody>().AddForce(dir*15,ForceMode.Impulse);
+        if (duckType == 0)
+        {
+            GetComponent<Rigidbody>().AddForce(dir * 15, ForceMode.Impulse);
+            GetComponent<Animator>().SetTrigger("Hurt");
+        }
+            
         currentHealth -= damage;
 
         if (currentHealth <= 0)
         {
-            //Die();
+            Die();
         }
 
         print("hit");

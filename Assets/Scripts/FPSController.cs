@@ -152,7 +152,7 @@ public class FPSController : MonoBehaviour
                 print(curDistance);
                 if (curDistance > distance) damage = 4;
 
-                    // Si el rifle está seleccionado, un solo disparo elimina al enemigo
+                // Si el rifle está seleccionado, un solo disparo elimina al enemigo
                 EnemyHealth enemyHealth = hit.transform.GetComponent<EnemyHealth>();
                 if (enemyHealth != null)
                 {
@@ -205,7 +205,7 @@ public class FPSController : MonoBehaviour
 
         if (health <= 0)
         {
-            PlayerDie();
+            //PlayerDie();
         }
     }
 

@@ -7,7 +7,6 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using DG.Tweening;
 using MoreMountains.Tools;
 using MoreMountains.Feedbacks;
 
@@ -59,8 +58,6 @@ public class GameManager : Singleton<GameManager>
         sensitivitySlider.onValueChanged.AddListener(OnSensitivityValueChange);
         musicSlider.onValueChanged.AddListener(OnMusicValueChange);
         sfxSlider.onValueChanged.AddListener(OnSFXValueChange);
-
-        DOTween.Sequence().AppendInterval(levelDuration).AppendCallback(() => EndLevel());
     }
 
     void Update()
@@ -69,6 +66,17 @@ public class GameManager : Singleton<GameManager>
         {
             mainAudioSource.Play();
             startLoop = true;
+        }
+
+        if (!gamePaused)
+        {
+            levelDuration -= Time.deltaTime;
+        }
+
+        if (levelDuration <= 0)
+        {
+            gamePaused = true;
+            EndLevel();
         }
     }
 

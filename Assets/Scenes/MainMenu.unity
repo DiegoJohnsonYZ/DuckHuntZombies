@@ -16011,7 +16011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introAudioSource: {fileID: 5145009007661516801}
-  mainAudioSource: {fileID: 0}
+  mainAudioSource: {fileID: 257401108}
   titleRect: {fileID: 898302844}
   playButtonRect: {fileID: 5145009006849012284}
   creditsButtonsRect: {fileID: 5145009007674844848}

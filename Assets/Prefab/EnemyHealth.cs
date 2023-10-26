@@ -18,7 +18,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
 
-        quackSequence = DOTween.Sequence().AppendCallback(() => enemySound.Play()).AppendInterval(3f).SetLoops(-1, LoopType.Yoyo).SetId("quack").Pause();
+        quackSequence = DOTween.Sequence().AppendCallback(() => enemySound.Play()).AppendInterval(2f).SetLoops(-1, LoopType.Yoyo).SetId("quack").Pause();
 
         quackSequence.Play();
     }

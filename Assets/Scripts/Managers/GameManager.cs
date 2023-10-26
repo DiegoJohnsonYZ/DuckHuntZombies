@@ -112,15 +112,15 @@ public class GameManager : Singleton<GameManager>
 
     public void EndLevel()
     {
-        winFeedback.PlayFeedbacks();
         gameOverContainer.SetActive(true);
+        winFeedback.PlayFeedbacks();
         depthOfField.active = true;
     }
 
     public void GameOver()
     {
-        gameOverFeedback.PlayFeedbacks();
         gameOverContainer.SetActive(true);
+        gameOverFeedback.PlayFeedbacks();
         depthOfField.active = true;
     }
 
